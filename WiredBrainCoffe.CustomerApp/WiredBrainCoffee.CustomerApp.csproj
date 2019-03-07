@@ -7,8 +7,8 @@
     <ProjectGuid>{B466E0E9-FC11-454F-B083-C91231620858}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WiredBrainCoffe.CustomerApp</RootNamespace>
-    <AssemblyName>WiredBrainCoffe.CustomerApp</AssemblyName>
+    <RootNamespace>WiredBrainCoffee.CustomerApp</RootNamespace>
+    <AssemblyName>WiredBrainCoffee.CustomerApp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>

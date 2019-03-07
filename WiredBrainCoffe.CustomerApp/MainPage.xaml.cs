@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace WiredBrainCoffe.CustomerApp
+namespace WiredBrainCoffee.CustomerApp
 {
     public sealed partial class MainPage : Page
     {
