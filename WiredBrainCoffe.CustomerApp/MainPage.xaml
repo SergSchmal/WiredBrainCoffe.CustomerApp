@@ -5,59 +5,90 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:WiredBrainCoffe.CustomerApp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    d:DesignWidth="600"
     d:DesignHeight="400"
+    d:DesignWidth="600"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.ColumnSpan="2" Background="#F05A28" Orientation="Horizontal">
+        <StackPanel
+            Grid.ColumnSpan="3"
+            Background="#F05A28"
+            Orientation="Horizontal">
             <Image
                 Height="90"
+                Margin="5"
                 VerticalAlignment="Top"
-                Source="Images/logo.png" 
-                Margin="5"/>
+                Source="Images/logo.png" />
             <TextBlock
+                Margin="20"
+                VerticalAlignment="Bottom"
                 FontSize="30"
                 FontWeight="ExtraBold"
                 Foreground="White"
-                Text="Coffee Customers" 
+                Text="Coffee Customers" />
+            <TextBlock
+                Margin="0,0,0,25"
                 VerticalAlignment="Bottom"
-                Margin="20"/>
-            <TextBlock Foreground="#333333" Text="Version 1.0" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
+                Foreground="#333333"
+                Text="Version 1.0" />
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="0">
-            <Button
-                Margin="10"
-                Click="ButtonAddCustomer_Click">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <SymbolIcon Symbol="AddFriend" />
-                        <TextBlock Margin="5,0,0,0" Text="Add customer" />
-                    </StackPanel>
-                </Button.Content>
-            </Button>
-            <ListView>
+        <Grid
+            x:Name="customerListGrid"
+            Grid.Row="1"
+            Grid.Column="0"
+            Background="#EEEEEE">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="10" Click="ButtonMove_Click">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon x:Name="moveSymbolIcon" Symbol="Forward" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button Margin="10" Click="ButtonAddCustomer_Click">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="AddFriend" />
+                            <TextBlock Margin="5,0,0,0" Text="Add" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button Margin="10" Click="ButtonDeleteCustomer_Click">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="Delete" />
+                            <TextBlock Margin="5,0,0,0" Text="Delete" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            <ListView Grid.Row="1">
                 <ListViewItem>Thomas</ListViewItem>
                 <ListViewItem>Julia</ListViewItem>
                 <ListViewItem>Anna</ListViewItem>
             </ListView>
-        </StackPanel>
-       
+        </Grid>
+
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <TextBox Header="FirstName" Margin="10"/>
-            <TextBox Header="LastName" Margin="10"/>
-            <CheckBox Content="Is developer" Margin="10"/>
+            <TextBox Margin="10" Header="FirstName" />
+            <TextBox Margin="10" Header="LastName" />
+            <CheckBox Margin="10" Content="Is developer" />
         </StackPanel>
     </Grid>
 </Page>
