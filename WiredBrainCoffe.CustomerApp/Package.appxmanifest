@@ -3,7 +3,7 @@
   <Identity Name="2181961d-0099-4787-a2bd-fa083e79dec8" Publisher="CN=schmal" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="2181961d-0099-4787-a2bd-fa083e79dec8" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>WiredBrainCoffe.CustomerApp</DisplayName>
+    <DisplayName>WiredBrainCoffee.CustomerApp</DisplayName>
     <PublisherDisplayName>schmal</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -14,8 +14,8 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="WiredBrainCoffe.CustomerApp.App">
-      <uap:VisualElements DisplayName="WiredBrainCoffe.CustomerApp" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="WiredBrainCoffe.CustomerApp" BackgroundColor="#333333">
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="WiredBrainCoffee.CustomerApp.App">
+      <uap:VisualElements DisplayName="WiredBrainCoffee.CustomerApp" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="WiredBrainCoffee.CustomerApp" BackgroundColor="#333333">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
