@@ -126,6 +126,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\CustomerConverter.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Base\Observable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

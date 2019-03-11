@@ -1,7 +1,9 @@
-﻿using WiredBrainCoffee.CustomerApp.Base;
+﻿using Windows.Foundation.Metadata;
+using WiredBrainCoffee.CustomerApp.Base;
 
 namespace WiredBrainCoffee.CustomerApp.Model
 {
+    [CreateFromString(MethodName = "WiredBrainCoffee.CustomerApp.Model.CustomerConverter.CreateCustomerFromString")]
     public class Customer : Observable
     {
         private string _firstName;
