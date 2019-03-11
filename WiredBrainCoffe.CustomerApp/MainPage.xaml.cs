@@ -1,26 +1,57 @@
 ﻿using System;
+using System.Linq;
+using Windows.ApplicationModel;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using WiredBrainCoffee.CustomerApp.DataProvider;
+using WiredBrainCoffee.CustomerApp.Model;
 
 namespace WiredBrainCoffee.CustomerApp
 {
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage
     {
+        private readonly CustomerDataProvider _customerDataProvider;
+
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+            Loaded += OnLoaded;
+            Application.Current.Suspending += App_Suspending;
+            _customerDataProvider = new CustomerDataProvider();
         }
 
-        private async void ButtonAddCustomer_Click(object sender, RoutedEventArgs e)
+        private async void App_Suspending(object sender, SuspendingEventArgs e)
         {
-            var messageDialog = new MessageDialog("Customer added!");
-            await messageDialog.ShowAsync();
+            var deferral = e.SuspendingOperation.GetDeferral();
+            await _customerDataProvider.SaveCustomersAsync(customerListView.Items?.OfType<Customer>());
+            deferral.Complete();
+        }
+
+        private async void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            customerListView.Items?.Clear();
+
+            var customers = await _customerDataProvider.LoadCustomersAsync();
+            foreach (var customer in customers)
+            {
+                customerListView.Items?.Add(customer);
+            }
+        }
+
+        private void ButtonAddCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            var customer = new Customer {FirstName = "New"};
+            customerListView.Items?.Add(customer);
+            customerListView.SelectedItem = customer;
         }
 
         private void ButtonDeleteCustomer_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (customerListView.SelectedItem is Customer customer)
+            {
+                customerListView.Items?.Remove(customer);
+            }
         }
 
         private void ButtonMove_Click(object sender, RoutedEventArgs e)
@@ -32,6 +63,12 @@ namespace WiredBrainCoffee.CustomerApp
             Grid.SetColumn(customerListGrid, newColumn);
 
             moveSymbolIcon.Symbol = newColumn == 0 ? Symbol.Forward : Symbol.Back;
+        }
+
+        private void CustomerListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var customer = customerListView.SelectedItem as Customer;
+            customerDetailControl.Customer = customer;
         }
     }
 }
