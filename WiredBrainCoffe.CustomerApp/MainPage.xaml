@@ -11,7 +11,7 @@
     d:DesignWidth="600"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
-
+    <Page.Resources />
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -46,11 +46,18 @@
                 Text="Version 1.0" />
         </StackPanel>
 
+        <Button
+            Grid.Row="0"
+            Grid.Column="2"
+            HorizontalAlignment="Right"
+            Click="ButtonBase_OnClick"
+            Content="Toggle theme" />
+
         <Grid
             x:Name="customerListGrid"
             Grid.Row="1"
             Grid.Column="0"
-            Background="#EEEEEE">
+            Background="{ThemeResource BackgroundColorBrush}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
@@ -90,7 +97,6 @@
         <controls:CustomerDetailControl
             x:Name="customerDetailControl"
             Grid.Row="1"
-            Grid.Column="1"
-            Customer="Thomas, Developer, true"/>
+            Grid.Column="1" />
     </Grid>
 </Page>

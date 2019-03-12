@@ -19,6 +19,7 @@ namespace WiredBrainCoffee.CustomerApp
             Loaded += OnLoaded;
             Application.Current.Suspending += App_Suspending;
             _customerDataProvider = new CustomerDataProvider();
+            RequestedTheme = Application.Current.RequestedTheme == ApplicationTheme.Light ? ElementTheme.Dark : ElementTheme.Light;
         }
 
         private async void App_Suspending(object sender, SuspendingEventArgs e)
@@ -69,6 +70,11 @@ namespace WiredBrainCoffee.CustomerApp
         {
             var customer = customerListView.SelectedItem as Customer;
             customerDetailControl.Customer = customer;
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            RequestedTheme = RequestedTheme == ElementTheme.Dark ? ElementTheme.Light : ElementTheme.Dark;
         }
     }
 }
