@@ -6,16 +6,20 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using WiredBrainCoffee.CustomerApp.DataProvider;
 using WiredBrainCoffee.CustomerApp.Model;
+using WiredBrainCoffee.CustomerApp.ViewModel;
 
 namespace WiredBrainCoffee.CustomerApp
 {
     public sealed partial class MainPage
     {
         private readonly CustomerDataProvider _customerDataProvider;
+        private MainViewModel _mainViewModel;
 
         public MainPage()
         {
             InitializeComponent();
+            _mainViewModel = new MainViewModel(new CustomerDataProvider());
+            DataContext = _mainViewModel;
             Loaded += OnLoaded;
             Application.Current.Suspending += App_Suspending;
             _customerDataProvider = new CustomerDataProvider();
@@ -25,19 +29,13 @@ namespace WiredBrainCoffee.CustomerApp
         private async void App_Suspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            await _customerDataProvider.SaveCustomersAsync(customerListView.Items?.OfType<Customer>());
+            await _mainViewModel.SaveAsync();
             deferral.Complete();
         }
 
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
-            customerListView.Items?.Clear();
-
-            var customers = await _customerDataProvider.LoadCustomersAsync();
-            foreach (var customer in customers)
-            {
-                customerListView.Items?.Add(customer);
-            }
+            await _mainViewModel.LoadAsync();
         }
 
         private void ButtonAddCustomer_Click(object sender, RoutedEventArgs e)
@@ -64,12 +62,6 @@ namespace WiredBrainCoffee.CustomerApp
             Grid.SetColumn(customerListGrid, newColumn);
 
             moveSymbolIcon.Symbol = newColumn == 0 ? Symbol.Forward : Symbol.Back;
-        }
-
-        private void CustomerListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var customer = customerListView.SelectedItem as Customer;
-            customerDetailControl.Customer = customer;
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

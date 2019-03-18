@@ -8,7 +8,13 @@ using WiredBrainCoffee.CustomerApp.Model;
 
 namespace WiredBrainCoffee.CustomerApp.DataProvider
 {
-    public class CustomerDataProvider
+    public interface ICustomerDataProvider
+    {
+        Task<IEnumerable<Customer>> LoadCustomersAsync();
+        Task SaveCustomersAsync(IEnumerable<Customer> customers);
+    }
+
+    public class CustomerDataProvider : ICustomerDataProvider
     {
         private static readonly string _customersFileName = "customers.json";
         private static readonly StorageFolder _localFolder = ApplicationData.Current.LocalFolder;

@@ -11,7 +11,8 @@
     d:DesignWidth="600"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
-    <Page.Resources />
+    <Page.Resources>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -38,7 +39,7 @@
                 FontSize="30"
                 FontWeight="ExtraBold"
                 Foreground="White"
-                Text="Coffee Customers" />
+                Text="{StaticResource appTitle}" />
             <TextBlock
                 Margin="0,0,0,25"
                 VerticalAlignment="Bottom"
@@ -90,13 +91,14 @@
             <ListView
                 x:Name="customerListView"
                 Grid.Row="1"
-                DisplayMemberPath="FirstName"
-                SelectionChanged="CustomerListView_OnSelectionChanged" />
+                ItemsSource="{Binding Customers}"
+                DisplayMemberPath="FirstName" />
         </Grid>
 
         <controls:CustomerDetailControl
             x:Name="customerDetailControl"
             Grid.Row="1"
-            Grid.Column="1" />
+            Grid.Column="1" 
+            Customer="{Binding ElementName=customerListView, Path=SelectedItem, Mode=OneWay}"/>
     </Grid>
 </Page>

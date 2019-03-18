@@ -7,10 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    x:Name="root">
     <StackPanel Grid.Row="1" Grid.Column="1">
-        <TextBox Margin="10" Header="FirstName" x:Name="txtFirstName" TextChanged="TextBox_OnTextChanged"/>
-        <TextBox Margin="10" Header="LastName" x:Name="txtLastName"  TextChanged="TextBox_OnTextChanged"/>
-        <CheckBox Margin="10" Content="Is developer" x:Name="chkIsDeveloper" Checked="ChkIsDeveloper_OnChecked"/>
+        <TextBox Margin="10" Header="FirstName" Text="{Binding ElementName=root,Path=Customer.FirstName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Margin="10" Header="LastName" Text="{Binding ElementName=root,Path=Customer.LastName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <CheckBox Margin="10" Content="Is developer" IsChecked="{Binding ElementName=root,Path=Customer.IsDeveloper,Mode=TwoWay}"/>
     </StackPanel>
 </UserControl>
