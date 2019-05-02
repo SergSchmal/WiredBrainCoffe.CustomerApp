@@ -71,7 +71,7 @@
                         </StackPanel>
                     </Button.Content>
                 </Button>
-                <Button Margin="10" Click="ButtonAddCustomer_Click">
+                <Button Margin="10" Click="{x:Bind _mainViewModel.AddCustomer}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="AddFriend" />
@@ -79,7 +79,8 @@
                         </StackPanel>
                     </Button.Content>
                 </Button>
-                <Button Margin="10" Click="ButtonDeleteCustomer_Click">
+                <Button Margin="10" Click="{x:Bind _mainViewModel.DeleteCustomer}"
+                        IsEnabled="{x:Bind _mainViewModel.IsCustomerSelected, Mode=OneWay}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="Delete" />
@@ -89,16 +90,26 @@
                 </Button>
             </StackPanel>
             <ListView
-                x:Name="customerListView"
                 Grid.Row="1"
-                ItemsSource="{Binding Customers}"
-                DisplayMemberPath="FirstName" />
+                ItemsSource="{x:Bind _mainViewModel.Customers, Mode=OneWay}"
+                SelectedItem="{x:Bind _mainViewModel.SelectedCustomer, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Customer">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{x:Bind FirstName, Mode=OneWay}" FontWeight="Bold"/>
+                            <TextBlock Text="{x:Bind LastName, Mode=OneWay}" Margin="5 0 0 0"/>
+                            <TextBlock Text="(Developer)" Margin="5 0 0 0" Opacity="0.5" Visibility="{x:Bind IsDeveloper, Mode=OneWay}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
 
         <controls:CustomerDetailControl
             x:Name="customerDetailControl"
             Grid.Row="1"
             Grid.Column="1" 
-            Customer="{Binding ElementName=customerListView, Path=SelectedItem, Mode=OneWay}"/>
+            Customer="{x:Bind _mainViewModel.SelectedCustomer, Mode=OneWay}"
+            Visibility="{x:Bind _mainViewModel.IsCustomerSelected, Mode=OneWay}"/>
     </Grid>
 </Page>
